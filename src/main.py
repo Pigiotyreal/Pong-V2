@@ -25,6 +25,9 @@ def draw():
     pygame.draw.rect(screen, white, [10, Height / 2 - 50, 10, 100])
     pygame.draw.rect(screen, white, [Width - 20, Height / 2 - 50, 10, 100])
     
+    #Ball
+    pygame.draw.rect(screen, white, [Width / 2 - 5, Height / 2 - 5, 10, 10])
+    
     pygame.display.flip()
 
 while True:
