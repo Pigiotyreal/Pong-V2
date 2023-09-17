@@ -83,6 +83,8 @@ while True:
         paddle_y -= paddle_speed
     if keys[pygame.K_s]:
         paddle_y += paddle_speed
+    if keys[pygame.K_ESCAPE]:
+        sys.exit()
     
     if paddle_y < 0:
         paddle_y = 0
