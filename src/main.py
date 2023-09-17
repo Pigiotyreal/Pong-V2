@@ -14,7 +14,7 @@ black = (0, 0, 0)
 
 clock = pygame.time.Clock()
 
-paddle_speed = 2
+paddle_speed = 2.5
 paddle_y = Height / 2 - 50
 ai_paddle_y = Height / 2 - 50
 ball_speed = [3, 3]
