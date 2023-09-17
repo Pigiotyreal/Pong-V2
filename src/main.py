@@ -55,6 +55,8 @@ def draw():
     ball_rect.move_ip(ball_speed)
     if ball_rect.colliderect(paddle1) or ball_rect.colliderect(paddle2):
         ball_speed[0] = -ball_speed[0]
+    if ball_rect.colliderect(paddle1):
+        pygame.mixer.Sound("hit.wav").play().set_volume(0.5)
     elif ball_rect.left < 0:
         ball_speed[0] = -ball_speed[0]
         score[1] += 1
