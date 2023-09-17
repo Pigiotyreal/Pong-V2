@@ -17,8 +17,13 @@ clock = pygame.time.Clock()
 def draw():
     screen.fill(black)
     
+    #Net
     for i in range(0, Height, 25):
         pygame.draw.rect(screen, white, [Width / 2 - 2.5, i, 5, 10])
+        
+    #Paddles
+    pygame.draw.rect(screen, white, [10, Height / 2 - 50, 10, 100])
+    pygame.draw.rect(screen, white, [Width - 20, Height / 2 - 50, 10, 100])
     
     pygame.display.flip()
 
