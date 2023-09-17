@@ -2,6 +2,10 @@ import pygame
 import sys
 
 pygame.init()
+pygame.mixer.init()
+
+pygame.mixer.music.load("music.mp3")
+pygame.mixer.music.play(-1)
 
 Width = 1280
 Height = 720
@@ -64,14 +68,14 @@ def draw():
     pygame.draw.rect(screen, white, ball_rect)
     
     #Score
-    font = pygame.font.Font("src/font.ttf", 50)
+    font = pygame.font.Font("font.ttf", 50)
     text = font.render(str(score[0]), True, white)
     screen.blit(text, (Width / 2 - 50, 10))
     text = font.render(str(score[1]), True, white)
     screen.blit(text, (Width / 2 + 25, 10))
     
     #FPS
-    font = pygame.font.Font("src/font.ttf", 20)
+    font = pygame.font.Font("font.ttf", 20)
     text = font.render(str(int(clock.get_fps())), True, white)
     screen.blit(text, (10, Height - 30))
     
@@ -84,6 +88,8 @@ while True:
     if keys[pygame.K_s]:
         paddle_y += paddle_speed
     if keys[pygame.K_ESCAPE]:
+        pygame.mixer.music.stop()
+        pygame.quit()
         sys.exit()
     
     if paddle_y < 0:
@@ -95,6 +101,8 @@ while True:
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            pygame.mixer.music.stop()
+            pygame.quit()
             sys.exit()
 
     draw()
