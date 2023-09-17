@@ -16,9 +16,12 @@ clock = pygame.time.Clock()
 
 paddle_speed = 2
 paddle_y = Height / 2 - 50
+ball_speed = [2, 2]
+ball_rect = pygame.Rect(Width / 2 - 5, Height / 2 - 5, 10, 10)
+score = [0, 0]
 
 def draw():
-    global paddle_y
+    global paddle_y, ball_rect
     screen.fill(black)
     
     #Net
@@ -26,17 +29,30 @@ def draw():
         pygame.draw.rect(screen, white, [Width / 2 - 2.5, i, 5, 10])
         
     #Paddles
-    pygame.draw.rect(screen, white, [10, paddle_y, 10, 100])
-    pygame.draw.rect(screen, white, [Width - 20, Height / 2 - 50, 10, 100])
+    paddle1 = pygame.draw.rect(screen, white, [10, paddle_y, 10, 100])
+    paddle2 = pygame.draw.rect(screen, white, [Width - 20, Height / 2 - 50, 10, 100])
     
     #Ball
-    pygame.draw.rect(screen, white, [Width / 2 - 5, Height / 2 - 5, 10, 10])
+    ball_rect.move_ip(ball_speed)
+    if ball_rect.colliderect(paddle1) or ball_rect.colliderect(paddle2):
+        ball_speed[0] = -ball_speed[0]
+    elif ball_rect.left < 0:
+        ball_speed[0] = -ball_speed[0]
+        score[1] += 1
+        ball_rect.center = (Width / 2, Height / 2)
+    elif ball_rect.right > Width:
+        ball_speed[0] = -ball_speed[0]
+        score[0] += 1
+        ball_rect.center = (Width / 2, Height / 2)
+    if ball_rect.top < 0 or ball_rect.bottom > Height:
+        ball_speed[1] = -ball_speed[1]
+    pygame.draw.rect(screen, white, ball_rect)
     
     #Score
     font = pygame.font.Font("src/font.ttf", 50)
-    text = font.render("0", True, white)
+    text = font.render(str(score[0]), True, white)
     screen.blit(text, (Width / 2 - 50, 10))
-    text = font.render("0", True, white)
+    text = font.render(str(score[1]), True, white)
     screen.blit(text, (Width / 2 + 25, 10))
     
     #FPS
