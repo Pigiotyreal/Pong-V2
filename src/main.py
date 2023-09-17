@@ -14,7 +14,11 @@ black = (0, 0, 0)
 
 clock = pygame.time.Clock()
 
+paddle_speed = 2
+paddle_y = Height / 2 - 50
+
 def draw():
+    global paddle_y
     screen.fill(black)
     
     #Net
@@ -22,7 +26,7 @@ def draw():
         pygame.draw.rect(screen, white, [Width / 2 - 2.5, i, 5, 10])
         
     #Paddles
-    pygame.draw.rect(screen, white, [10, Height / 2 - 50, 10, 100])
+    pygame.draw.rect(screen, white, [10, paddle_y, 10, 100])
     pygame.draw.rect(screen, white, [Width - 20, Height / 2 - 50, 10, 100])
     
     #Ball
@@ -43,6 +47,17 @@ def draw():
     pygame.display.flip()
 
 while True:
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        paddle_y -= paddle_speed
+    if keys[pygame.K_s]:
+        paddle_y += paddle_speed
+    
+    if paddle_y < 0:
+        paddle_y = 0
+    if paddle_y > Height - 100:
+        paddle_y = Height - 100
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
