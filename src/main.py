@@ -64,6 +64,7 @@ def draw():
     elif ball_rect.right > Width:
         ball_speed[0] = -ball_speed[0]
         score[0] += 1
+        pygame.mixer.Sound("point.wav").play()
         ball_rect.center = (Width / 2, Height / 2)
     if ball_rect.top < 0 or ball_rect.bottom > Height:
         ball_speed[1] = -ball_speed[1]
