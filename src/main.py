@@ -28,6 +28,13 @@ def draw():
     #Ball
     pygame.draw.rect(screen, white, [Width / 2 - 5, Height / 2 - 5, 10, 10])
     
+    #Score
+    font = pygame.font.Font("src/font.ttf", 50)
+    text = font.render("0", True, white)
+    screen.blit(text, (Width / 2 - 50, 10))
+    text = font.render("0", True, white)
+    screen.blit(text, (Width / 2 + 25, 10))
+    
     pygame.display.flip()
 
 while True:
