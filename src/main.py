@@ -16,12 +16,27 @@ clock = pygame.time.Clock()
 
 paddle_speed = 2
 paddle_y = Height / 2 - 50
-ball_speed = [2, 2]
+ai_paddle_y = Height / 2 - 50
+ball_speed = [3, 3]
 ball_rect = pygame.Rect(Width / 2 - 5, Height / 2 - 5, 10, 10)
 score = [0, 0]
 
+def ai_update():
+    global ai_paddle_y
+    target_y = ball_rect.centery - 50
+    if abs(target_y - ai_paddle_y) > paddle_speed:
+        if target_y > ai_paddle_y:
+            ai_paddle_y += paddle_speed
+        else:
+            ai_paddle_y -= paddle_speed
+
+    if ai_paddle_y < 0:
+        ai_paddle_y = 0
+    if ai_paddle_y > Height - 100:
+        ai_paddle_y = Height - 100
+
 def draw():
-    global paddle_y, ball_rect
+    global paddle_y, ball_rect, ai_paddle_y
     screen.fill(black)
     
     #Net
@@ -30,7 +45,7 @@ def draw():
         
     #Paddles
     paddle1 = pygame.draw.rect(screen, white, [10, paddle_y, 10, 100])
-    paddle2 = pygame.draw.rect(screen, white, [Width - 20, Height / 2 - 50, 10, 100])
+    paddle2 = pygame.draw.rect(screen, white, [Width - 20, ai_paddle_y, 10, 100])
     
     #Ball
     ball_rect.move_ip(ball_speed)
@@ -73,6 +88,8 @@ while True:
         paddle_y = 0
     if paddle_y > Height - 100:
         paddle_y = Height - 100
+
+    ai_update()
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
