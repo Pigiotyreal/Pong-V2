@@ -14,11 +14,14 @@ black = (0, 0, 0)
 
 clock = pygame.time.Clock()
 
+def draw():
+    screen.fill(black)
+    pygame.display.flip()
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
 
-    screen.fill(black)
-    pygame.display.flip()
+    draw()
     clock.tick(60)
