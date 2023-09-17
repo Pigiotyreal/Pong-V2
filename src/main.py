@@ -35,6 +35,11 @@ def draw():
     text = font.render("0", True, white)
     screen.blit(text, (Width / 2 + 25, 10))
     
+    #FPS
+    font = pygame.font.Font("src/font.ttf", 20)
+    text = font.render(str(int(clock.get_fps())), True, white)
+    screen.blit(text, (10, Height - 30))
+    
     pygame.display.flip()
 
 while True:
